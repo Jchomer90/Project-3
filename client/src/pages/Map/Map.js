@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Row, Container } from "../../components/Grid";
-import Navbar from "../../components/Navbar";
+import NavBar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { Button, Modal, Col } from 'react-bootstrap';
 import Form from "../../components/Form";
@@ -24,9 +24,15 @@ function Map(props) {
 
         const goodData = response.data.filter(submission => submission.experience == "Good");
         const badData = response.data.filter(submission => submission.experience == "Bad");
+        // this is the problem. goodExperiencedata/bad are not being set.
         setGoodExperienceData(goodData);
         setBadExperienceData(badData);
+        console.log(goodData)
+        console.log(badData)
+        console.log(goodExperienceData)
+        console.log(badExperienceData)
     };
+    // updateData();
 
     useEffect(_ => {
         updateData();
@@ -50,15 +56,28 @@ function Map(props) {
             //update with real user id
             id: props.userId
         }
+        // Ajax call
+        console.log("THIS IS DATA :)")
+        console.log(data);
+        API.savePost(body).then(response => {
+            setShow(false);
+                updateData();
+            // props.setRedirect("/home")
+            console.log("Save Post", response)
+        }).catch(err => {
+            console.log(err)
+        });
+        // API.savePost(data).then(response => {
+        //     console.log(response)
+        // });
 
-        API.savePost(body);
-        updateData();   
-        setShow(false);
+        // updateData(); cc not sure if we need this or not
     };
 
     return (
         <Container fluid>
-            <Navbar />
+            {props.renderRedirect()}
+            <NavBar handleLogout={props.handleLogout} />
             <Row>
                 <Button onClick={() => setShow(true)}>Submit Incident</Button>
             </Row>

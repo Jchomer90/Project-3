@@ -1,5 +1,6 @@
 import React from 'react';
 import { Map, GoogleApiWrapper, Container } from 'google-maps-react';
+import GoogleHeatMap from "../../components/GoogleHeatMap";
 
 // const containerStyles = {
 //     width: '90%',

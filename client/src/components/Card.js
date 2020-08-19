@@ -81,7 +81,7 @@ export default function RenderCard (props) {
             <div className="row">
                 <Card className="card cardInfo border-dark">
                 <Card.Body >
-                        <div className="row">
+                    <div className="row">
                         <div className="col-lg-12">
                             <Card.Header>
                             <Nav variant="tabs" defaultActiveKey="#first">

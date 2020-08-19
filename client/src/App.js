@@ -17,15 +17,19 @@ import API from "./utils/API";
 function App() {
   const [userId, setUserId] = useState("");
   const [loggedIn, setLoggedIn] = useState(false);
+  const [redirect, setRedirect] = useState("");
+
   useEffect(() => {
     getUser();
   }, []);
+
   const getUser = () => {
     API.getUsers().then((response) => {
       console.log(response);
       if (response.data.user) {
         setLoggedIn(true);
         setUserId(response.data.user._id);
+        setRedirect("")
         console.log(response.data.user._id);
       } else {
         setLoggedIn(false);
@@ -33,7 +37,6 @@ function App() {
     });
   };
 
-  const [redirect, setRedirect] = useState("")
   // useEffect(() => {
   //     if (loggedIn == false){
   //         setRedirect(true)
@@ -57,7 +60,7 @@ function App() {
   return (
     <>
       <Router>
-      {renderRedirect()}
+      {/* {renderRedirect()} */}
       {console.log(loggedIn)}
       {console.log("Logged In")}
         <main className="container-fluid">
@@ -66,28 +69,29 @@ function App() {
             path="/"
             component={() => <LoginForm handleLogout={handleLogout} setLoggedIn={setLoggedIn} setRedirect={setRedirect} renderRedirect={renderRedirect}/>}
           />
-          <Route exact path="/signup" component={SignUp} />
+          {/* <Route exact path="/signup" component={SignUp} /> */}
           <Route exact path="/login" component={() => <LoginForm handleLogout={handleLogout} setLoggedIn={setLoggedIn} setRedirect={setRedirect} renderRedirect={renderRedirect}/>}
           />
           <Route
             exact
             path="/home"
-            component={() => <Home loggedIn={loggedIn} handleLogout={handleLogout} renderRedirect={renderRedirect} setRedirect={setRedirect}/>}
+            component={() => <Home loggedIn={loggedIn} handleLogout={handleLogout} renderRedirect={renderRedirect} />}
           />
+          {/* */}
           <Route
             exact
             path="/map"
-            component={() => <Map userId={userId} loggedIn={loggedIn} handleLogout={handleLogout} renderRedirect={renderRedirect} setRedirect={setRedirect}/>}
+            component={() => <Map userId={userId} loggedIn={loggedIn} handleLogout={handleLogout} setRedirect={setRedirect} renderRedirect={renderRedirect} />}
           />
           <Route
             exact
             path="/resources"
-            component={() => <Resources loggedIn={loggedIn} handleLogout={handleLogout} renderRedirect={renderRedirect} setRedirect={setRedirect}/>}
+            component={() => <Resources loggedIn={loggedIn} handleLogout={handleLogout} renderRedirect={renderRedirect} />}
           />
           <Route
             exact
             path="/logout"
-            component={() => <Resources loggedIn={loggedIn} handleLogout={handleLogout} renderRedirect={renderRedirect} setRedirect={setRedirect}/>}
+            component={() => <LoginForm loggedIn={loggedIn} handleLogout={handleLogout} renderRedirect={renderRedirect} setRedirect={setRedirect}/>}
           />
         </main>
       </Router>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Container } from "../../components/Grid";
 import NavBar from "../../components/Navbar";
 import Footer from "../../components/Footer";
-import { Card, Modal, Nav } from 'react-bootstrap';
+import { Card, Modal, Nav,  } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Redirect } from "react-router-dom";
 import { List, ListItem } from "../../components/List";
@@ -20,9 +20,8 @@ const mapStyles = {
 
 const Styles = styled.div`
 
-    .background {
+    .row {
         width: 100%;
-        max-height: 530px;
     }
 
     .jumbotron {
@@ -36,6 +35,64 @@ const Styles = styled.div`
         margin-top: -100px;
         width: 100%;
     }
+    .cardInfo {
+        font-family: Frutiger;
+        font-size: 20px;
+        // text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000, 1px 1px 0 #000000;
+        width: 100% !important;
+        height: auto;
+        background-color: #fff8f0ff;
+        margin: 50px;
+        color: #000;
+        // margin-left: 5%;
+    
+    }
+    
+    .card:hover{
+        transform: scale(1.02);
+        box-shadow: 0 10px 20px rgba(0,0,0,.5), 0 4px 8px rgba(0,0,0,.06);
+        opacity: 2.0;
+    }
+    
+    .card-header {
+        background: linear-gradient(to top left, #ffcf99ff 40%, #92140cff 90%);        border-radius: 10px !important;
+    }
+    
+  .card {
+    //     width: 400px;
+        border-radius: 40px !important;
+        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 1px 6px rgba(0,0,0,.05);
+    }
+    
+    .background {
+        width: 100%;
+        max-height: 530px;
+    }
+    
+    .jumbotron {
+            position: relative;
+            margin-top: 100px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+    
+    .tab {
+        background-color: #F8F8FF !important;
+        border-radius: 4px !important;
+    }
+
+    .bod {
+        margin: 10px;
+    }
+
+    .resp {
+        margin-top: 20px;
+    }
+
+    h2 {
+
+    }
 `
 
  const backgroundStyle = {
@@ -47,11 +104,11 @@ const Styles = styled.div`
 
 export default function Home (props) {
     // const [redirect, setRedirect] = useState(false)
-    useEffect(() => {
-        if (props.loggedIn == false){
-            props.setRedirect(true)
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (props.loggedIn == false){
+    //         props.setRedirect("/login")
+    //     }
+    // }, [])
 
     // const renderRedirect= () => {
     //     if (redirect == true){
@@ -85,6 +142,7 @@ export default function Home (props) {
 
 
     return (
+    <>
     <Styles style={backgroundStyle}>
 
 
@@ -93,37 +151,83 @@ export default function Home (props) {
     <Container fluid className="test">
     {props.renderRedirect()}
 
-        <NavBar />
+    <NavBar handleLogout={props.handleLogout}/>     
+
+        <h2>Public Feed</h2>
         
         {posts.length ? (
-                <List>
+                <div className="row">
                     {posts.map(post => {
-                    
+                    console.log(post);
                         return (
-                            <>
-                            <Card key={post._id}>
-                                
-                                    <strong>ss
-                                    {post.description}
-                                    </strong>
-                                    <strong>
-                                    {post.lng}
-                                    </strong>
-                                    <strong>
-                                    {post.lat}
-                                    </strong>
-                                    <strong>
-                                    {post.badge}
-                                    </strong>
-                                    <strong>
-                                    {post.day}
-                                    </strong>
-                            </Card>
-                            
-                    </>
+                            <div className="row">
+                                <Card className="card cardInfo border-dark">
+                                <Card.Body className="bod">
+                                    <div className="row">
+                                        <div className="col">
+                                            <Card.Header>
+                                            <Nav variant="tabs" defaultActiveKey="#first">
+                                            <Nav.Item className="tab">
+                                                <Nav.Link href="#first" className="tab">Incident Details</Nav.Link>
+                                            </Nav.Item>
+                                            <Nav.Item>
+                                                <Nav.Link variant="primary" onClick={() => setLgShow(true)}>Map</Nav.Link>
+
+                                                <Modal
+                                                size="lg"
+                                                show={lgShow} 
+                                                onHide={() => setLgShow(false)} dialogClassName="modal-90w"  
+                                                aria-labelledby="example-custom-modal-styling-title"        
+                                                >
+                                                        <Container className="homeMap">
+                                                            <MapContainer 
+                                                            closeButton
+                                                            style={mapStyles}
+                                                            />
+                                                        </Container>
+                                            </Modal>
+                                            </Nav.Item>
+                                            </Nav>
+                                            </Card.Header>
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                    <div className="col resp">
+                                            <Card.Text >
+                                                
+                                                <p><strong>User: </strong>{post._id}</p>
+                                                   
+                                            </Card.Text>
+                                            <Card.Text key={post._id}>
+                                                
+                                                <p><strong>Description: </strong>{post.description}</p>
+                                                   
+                                            </Card.Text>
+                                            <Card.Text>
+                                                    <strong>
+                                                    {post.lng}
+                                                    </strong>
+                                            </Card.Text>
+                                            <Card.Text>
+                                                    <strong>
+                                                    {post.lat}
+                                                    </strong>
+                                            </Card.Text>
+                                            <Card.Text>
+                                                    <p><strong>Officer Badge Number: </strong>{post.badgeNumber}</p>
+                                            </Card.Text>
+                                            <Card.Text>
+                                                    <p><strong>Date: </strong>{post.date}</p>
+                                            </Card.Text>
+                                    </div>     
+                                    </div> 
+
+                                </Card.Body>
+                                </Card>
+                            </div>
                         );
                     })}
-                </List>
+                </div>
                  ) : (
                     <div>
                           <h3>No Results to Display</h3>
@@ -136,5 +240,7 @@ export default function Home (props) {
         <Footer />
     </Container>
     </Styles>
+    </>
+
     )
 }

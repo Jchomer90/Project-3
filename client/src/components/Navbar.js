@@ -8,7 +8,7 @@ import axios from "axios";
 import "./NavBar.css";
 
 // import "./Navbar.css";
-import Image from "../image/kelly-kiernan.jpeg";
+import Image from "../image/nature.jpeg";
 
 
 
@@ -17,7 +17,7 @@ const Styles = styled.div`
     .navbar {
         display: flex;
         background-color: transparent;
-        margin-bottom: 20px;
+        margin-top: -45px;
         width: 100%;
         font-family: Andale Mono;
     }
@@ -59,10 +59,14 @@ const Styles = styled.div`
         width: 100%;
     }
 
-    // .test {
-    //     margin-top: -100px;
-    //     width: 100%;
-    // }
+    .test {
+        margin-top: 5px;
+        width: 100%;
+    }
+
+    .header {
+        margin-top: 30px;
+    }
 
 `
 const backgroundStyle = {
@@ -93,18 +97,17 @@ function NavBar(props) {
             <>
             <Styles>
             <div className="test">
-                <Jumbotron fluid style={backgroundStyle}>
+                <Jumbotron fluid style={backgroundStyle} className="header">
                     <Navbar expand="md">
                         <Navbar.Brand href="/home" className="title ">Title</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                         <Navbar.Collapse id="links basic-navbar-nav float-right">
                             <Nav className="mr-auto justify-content-end">
-                                <Nav.Link href="/" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>Login</Nav.Link>
-                                <Nav.Link href="/signup" className={location.pathname === "/signup" ? "nav-link active" : "nav-link"}>Signup</Nav.Link>
+                                <Nav.Link href="/" className={location.pathname === "/login" ? "nav-link active" : "nav-link"}>Login/Signup</Nav.Link>
                                 <Nav.Link href="/home" className={location.pathname === "/home" ? "nav-link active" : "nav-link"}>Home</Nav.Link>
                                 <Nav.Link href="/map" className={location.pathname === "/map" ? "nav-link active" : "nav-link"}>Map</Nav.Link>
                                 <Nav.Link href="/resources" className={location.pathname === "/resources" ? "nav-link active" : "nav-link"}>Resources</Nav.Link>
-                                <Nav.Link onClick={props.handleLogout} className={location.pathname === "/" ? "nav-link active" : "nav-link"}>Log Out</Nav.Link>
+                                <Nav.Link onClick={props.handleLogout} className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>Log Out</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>

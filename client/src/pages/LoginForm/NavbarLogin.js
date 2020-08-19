@@ -69,7 +69,7 @@ function NavBarLogin(props) {
                                 <Nav.Link href="/home" className={location.pathname === "/home" ? "nav-link active" : "nav-link"}>Home</Nav.Link>
                                 {/* <Nav.Link href="/map" className={location.pathname === "/map" ? "nav-link active" : "nav-link"}>Map</Nav.Link> */}
                                 {/* <Nav.Link href="/resources" className={location.pathname === "/resources" ? "nav-link active" : "nav-link"}>Resources</Nav.Link> */}
-                                <Nav.Link onClick={props.handleLogout} className={location.pathname === "/" ? "nav-link active" : "nav-link"}>Log Out</Nav.Link>
+                                <Nav.Link onClick={props.handleLogout} className={location.pathname === "/logout" ? "nav-link active" : "nav-link"}>Log Out</Nav.Link>
                             </Nav>
                         </Navbar.Collapse>
                     </Navbar>
