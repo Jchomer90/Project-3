@@ -19,15 +19,18 @@ const mapStyles = {
 };
 
 const Styles = styled.div`
+
     .row {
         width: 100%;
     }
+
     .jumbotron {
             position: relative;
             margin-top: 100px;
             padding-top: 0;
             padding-bottom: 0;
         }
+
     .test {
         margin-top: -100px;
         width: 100%;
@@ -72,18 +75,23 @@ const Styles = styled.div`
             padding-top: 0;
             padding-bottom: 0;
         }
+
     
     .tab {
         background-color: #F8F8FF !important;
         border-radius: 4px !important;
     }
+
     .bod {
         margin: 10px;
     }
+
     .resp {
         margin-top: 20px;
     }
+
     h2 {
+
     }
 `
 

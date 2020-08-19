@@ -1,0 +1,20 @@
+import React, { useEffect, useState } from "react";
+import { Col, Row, Container } from "../../components/Grid";
+import NavBar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+
+
+
+function Chart () {
+
+    return (
+    <Container fluid>
+
+        <NavBar />
+
+        <Footer />
+    </Container>
+    )
+}
+
+export default Chart;
